@@ -21,10 +21,10 @@ import javax.persistence.Query;
 @Stateless
 public class CustomerManager {
 
-    @PersistenceContext(unitName = "customerPU")
+    @PersistenceContext
     private EntityManager em;
-    @Resource
-    private javax.transaction.UserTransaction utx;
+   
+   
 
    
     
@@ -45,15 +45,8 @@ public class CustomerManager {
      * @param customer
      */
     public void persist(Customer customer) {
-        try {
-            utx.begin();
-            em.persist(customer);
-            utx.commit();
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
-            throw new RuntimeException(e);
-        }
+      em.persist(customer);
+  
     }
-
     
 }
